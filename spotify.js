@@ -12,8 +12,8 @@ var keys = require("./keys.js");
 
 
 
-function processSpotify() {
-    let title = process.argv[3];
+function processSpotify(title) {
+    // let title = process.argv[3];
     // console.log(title);
 
     var spotify = new Spotify(keys.spotify);

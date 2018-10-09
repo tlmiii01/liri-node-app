@@ -2,8 +2,8 @@
 var request = require("request");
 
 // Function to process the Bands in Town request
-function processBandsInTown() {
-    let artist = process.argv[3];
+function processBandsInTown(artist) {
+    // let artist = process.argv[3];
     let queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 
     // Get the data from Bands In Town
