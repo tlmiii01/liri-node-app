@@ -10,38 +10,56 @@ if (dotenv.error) {
 var keys = require("./keys.js");
 // console.log(keys.spotify);
 
-
+// List of possible matches
+var songMatches = [];
 
 function processSpotify(title) {
-    // let title = process.argv[3];
-    // console.log(title);
 
     var spotify = new Spotify(keys.spotify);
-
-    // spotify.search({ type: 'track', query: title }, function (err, data) {
-    //     if (err) {
-    //         return console.log('Error occurred: ' + err);
-    //     }
-    //     var items = data.tracks.items;
-    //     // for (let i = 0; i < items.length; ++i) {
-    //     //     console.log(items[i].name);
-    //     // }
-
-    //     for (let item of items) {
-    //         console.log(item.name);
-    //     }
-    // });
 
     title = title.replace(/ /g, "%20");
     console.log(title);
 
-    var queryUrl = "https://api.spotify.com/v1/search?type=track&limit=10&q=" + title;
+    var queryUrl = "https://api.spotify.com/v1/search?type=track&limit=20&q=" + title;
 
     spotify
-        // .search({ type: "track", query: title })
+
         .request(queryUrl)
         .then((response) => {
-            console.log(response.tracks.items);
+
+            var count = 0;
+            var items = response.tracks.items;
+            // console.log(items.items);
+            // console.log(items.items);
+            for (match in items) {
+                count++;
+                var song = {
+                    title: items[match].name,
+                    artistName: items[match].artists[0].name,
+                    artistID: items[match].artists[0].id,
+                    albumName: items[match].album.name,
+                    previewUrl: items[match].preview_url
+                };
+
+                songMatches.push(song);
+            }
+            console.log(songMatches.length);
+            console.log(songMatches);
+
+            // console.log(response.tracks.items[9]);
+
+            // var song = {artistName: response.tracks.items[6].artists[0].name,
+            //             artistID: response.tracks.items[6].artists[0].id,
+            //             albumName: response.tracks.items[6].artists[0].name,
+            //             previewUrl: response.tracks.items[6].preview_url};
+
+            // console.log(song);
+            // console.log(response.tracks.items[0].artists[0].name);
+            // console.log(response.tracks.items[0].artists[0].id);
+            // console.log(response.tracks.items[0].album.name);
+            // console.log(response.tracks.items[0].preview_url);
+
+            // console.log(response.tracks.items[0]);
         })
         .catch((err) => {
             console.log(err);
