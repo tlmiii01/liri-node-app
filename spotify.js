@@ -17,6 +17,9 @@ function processSpotify(title) {
 
     var spotify = new Spotify(keys.spotify);
 
+    // Keeping a fresh version of the title for searching
+    var originalTitle = title.toLowerCase().replace(/\+/g, " ");
+    console.log(originalTitle);
     title = title.replace(/ /g, "%20");
     console.log(title);
 
@@ -32,34 +35,23 @@ function processSpotify(title) {
             // console.log(items.items);
             // console.log(items.items);
             for (match in items) {
-                count++;
-                var song = {
-                    title: items[match].name,
-                    artistName: items[match].artists[0].name,
-                    artistID: items[match].artists[0].id,
-                    albumName: items[match].album.name,
-                    previewUrl: items[match].preview_url
-                };
+                if (items[match].name.toLowerCase() === originalTitle ) {
+                    console.log("found one...");
+                    count++;
+                    var song = {
+                        title: items[match].name,
+                        artistName: items[match].artists[0].name,
+                        artistID: items[match].artists[0].id,
+                        albumName: items[match].album.name,
+                        previewUrl: items[match].preview_url
+                    };
+    
+                    songMatches.push(song);
+                }
 
-                songMatches.push(song);
             }
             console.log(songMatches.length);
             console.log(songMatches);
-
-            // console.log(response.tracks.items[9]);
-
-            // var song = {artistName: response.tracks.items[6].artists[0].name,
-            //             artistID: response.tracks.items[6].artists[0].id,
-            //             albumName: response.tracks.items[6].artists[0].name,
-            //             previewUrl: response.tracks.items[6].preview_url};
-
-            // console.log(song);
-            // console.log(response.tracks.items[0].artists[0].name);
-            // console.log(response.tracks.items[0].artists[0].id);
-            // console.log(response.tracks.items[0].album.name);
-            // console.log(response.tracks.items[0].preview_url);
-
-            // console.log(response.tracks.items[0]);
         })
         .catch((err) => {
             console.log(err);
