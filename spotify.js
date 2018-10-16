@@ -12,6 +12,35 @@ var keys = require("./keys.js");
 
 // List of possible matches
 var songMatches = [];
+var bestMatch = "";
+
+var divider = "***************************************************************************\n";
+
+// Function to determine the closest match
+function findBestMatch() {
+    // console.log("Inside function");
+    bestMatch = songMatches[0];
+    for (let i = 1; i < songMatches.length; ++i) {
+        if ( songMatches[i].popularity > bestMatch.popularity ) {
+            bestMatch = songMatches[i];
+        }
+    }
+}
+
+function printBestMatch() {
+    console.log(divider);
+    console.log("Information on the song:");
+    console.log("Song Name: " + bestMatch.title);
+    console.log("Artist: " + bestMatch.artistName);
+    console.log("Album Name: " + bestMatch.albumName);
+    if (bestMatch.previewUrl === null) {
+        console.log("No Preview URL is available..");
+    } else {
+        console.log("Preview URL: " + bestMatch.previewUrl);
+    }
+    console.log("\n");
+    console.log(divider);
+}
 
 function processSpotify(title) {
 
@@ -32,8 +61,8 @@ function processSpotify(title) {
 
             var count = 0;
             var items = response.tracks.items;
-            // console.log(items.items);
-            // console.log(items.items);
+            console.log(items.items);
+            
             for (match in items) {
                 if (items[match].name.toLowerCase() === originalTitle ) {
                     console.log("found one...");
@@ -43,15 +72,24 @@ function processSpotify(title) {
                         artistName: items[match].artists[0].name,
                         artistID: items[match].artists[0].id,
                         albumName: items[match].album.name,
-                        previewUrl: items[match].preview_url
+                        previewUrl: items[match].preview_url,
+                        popularity: parseInt(items[match].popularity)
                     };
     
                     songMatches.push(song);
+                    if (songMatches != "") {
+                        findBestMatch();
+                        printBestMatch();
+                        // console.log(bestMatch);
+                    } else {
+                        console.log("We could not find any matches...");
+                    }
                 }
-
             }
-            console.log(songMatches.length);
-            console.log(songMatches);
+            // console.log(songMatches.length);
+            // console.log(songMatches);
+
+            // console.log(items[0]);
         })
         .catch((err) => {
             console.log(err);
