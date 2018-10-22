@@ -8,7 +8,6 @@ if (dotenv.error) {
 
 // Importing the keys for Spotify
 var keys = require("./keys.js");
-// console.log(keys.spotify);
 
 // List of possible matches
 var songMatches = [];
@@ -18,7 +17,6 @@ var divider = "*****************************************************************
 
 // Function to determine the closest match
 function findBestMatch() {
-    // console.log("Inside function");
     bestMatch = songMatches[0];
     for (let i = 1; i < songMatches.length; ++i) {
         if ( songMatches[i].popularity > bestMatch.popularity ) {
@@ -48,10 +46,9 @@ function processSpotify(title) {
 
     // Keeping a fresh version of the title for searching
     var originalTitle = title.toLowerCase().replace(/\+/g, " ");
-    console.log(originalTitle);
+    
     title = title.replace(/ /g, "%20");
-    console.log(title);
-
+    
     var queryUrl = "https://api.spotify.com/v1/search?type=track&limit=20&q=" + title;
 
     spotify
@@ -61,11 +58,10 @@ function processSpotify(title) {
 
             var count = 0;
             var items = response.tracks.items;
-            console.log(items.items);
-            
+                        
             for (match in items) {
                 if (items[match].name.toLowerCase() === originalTitle ) {
-                    console.log("found one...");
+                    
                     count++;
                     var song = {
                         title: items[match].name,
@@ -77,19 +73,17 @@ function processSpotify(title) {
                     };
     
                     songMatches.push(song);
-                    if (songMatches != "") {
-                        findBestMatch();
-                        printBestMatch();
-                        // console.log(bestMatch);
-                    } else {
-                        console.log("We could not find any matches...");
-                    }
+                    
                 }
             }
-            // console.log(songMatches.length);
-            // console.log(songMatches);
 
-            // console.log(items[0]);
+            if (songMatches != "") {
+                findBestMatch();
+                printBestMatch();
+                
+            } else {
+                console.log("We could not find any matches...");
+            }
         })
         .catch((err) => {
             console.log(err);
