@@ -1,5 +1,6 @@
 // Importing rwquest 
 var request = require("request");
+var moment = require("moment");
 
 // Function to process the Bands in Town request
 function processBandsInTown(artist) {
@@ -8,7 +9,7 @@ function processBandsInTown(artist) {
 
     // Get the data from Bands In Town
     let bandInfo = request(queryURL, (error, response, body) => {
-        console.log("Into the function");
+        // console.log("Into the function");
         if (!error && response.statusCode === 200) {
             // Make the data a regular JSON object
             let parsedData = JSON.parse(body);
@@ -23,7 +24,9 @@ function processBandsInTown(artist) {
                 location += parsedData[event].venue.country;
     
                 console.log(location);
-                console.log(parsedData[event].datetime);
+                // console.log(parsedData[event].datetime);
+                console.log(moment(parsedData[event].datetime).format("MM/DD/YYYY"));
+                console.log("\n");
             }
 
             
