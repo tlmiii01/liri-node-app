@@ -41,7 +41,6 @@ function printBestMatch() {
 }
 
 function processSpotify(title) {
-
     var spotify = new Spotify(keys.spotify);
 
     // Keeping a fresh version of the title for searching
@@ -50,7 +49,6 @@ function processSpotify(title) {
     title = title.replace(/ /g, "%20");
     
     var queryUrl = "https://api.spotify.com/v1/search?type=track&limit=20&q=" + title;
-
     spotify
 
         .request(queryUrl)

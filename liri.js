@@ -9,14 +9,13 @@ var term = process.argv.slice(3).join("+");
 
 
 function processFile() {
-   fs.readFile("random.txt", "utf8", (err, data) => {
+   fs.readFile("./random.txt", "utf8", (err, data) => {
        if (err) {
            throw err
        } else {
            let dataArr = data.split(",");
            command = dataArr[0];
-           term = dataArr[1];
-           console.log(command);
+           term = dataArr[1].replace(/\"/g, "");
            processCommand(command, term)
            return;
        }
