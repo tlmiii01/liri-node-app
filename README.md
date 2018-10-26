@@ -28,8 +28,9 @@ This will search the Bands in Town Artist Events API for an artist and provide t
 
 Here are a couple of examples of the 'concert-this' command at work:
 
-![Concert-this1]("Pics/liri-node-app concert-this1.png")
-![Concert-this2]("Pics/liri-node-app concert-this2.png")
+![Concert-this1](pics/concert-this1.png)
+
+![Concert-this2](pics/concert-this2.png)
 
 2. `node liri.js spotify-this-song '<song name here>'`
 
