@@ -20,71 +20,56 @@ Decription of each command
 
 This will search the Bands in Town Artist Events API for an artist and provide the following information about each event to the terminal:
 
-     * Name of the venue
+    * Name of the venue
+    * Venue location
+    * Date of the Event (use moment to format this as "MM/DD/YYYY")
 
-     * Venue location
-
-     * Date of the Event (use moment to format this as "MM/DD/YYYY")
-
-Here are a couple of examples of the 'concert-this' command at work:
+Examples: 
 
 ![Concert-this1](pics/concert-this1.png)
 
 ![Concert-this2](pics/concert-this2.png)
 
-2. `node liri.js spotify-this-song '<song name here>'`
+`node liri.js spotify-this-song '<song name here>'`
 
-   * This will show the following information about the song in your terminal/bash window
+This will show the following information about the song in your terminal/bash window
 
-     * Artist(s)
+    * Artist(s)
+    * The song's name
+    * A preview link of the song from Spotify
+    * The album that the song is from
 
-     * The song's name
+Examples:
 
-     * A preview link of the song from Spotify
+![Spotify-Example1](pics/spotify1.png)
 
-     * The album that the song is from
+![Spotify-Example2](pics/spotify2.png)
+   
+`node liri.js movie-this '<movie name here>'`
 
-   * If no song is provided then your program will default to "The Sign" by Ace of Base.
+This will output the following information to your terminal/bash window:
 
-   * You will utilize the [node-spotify-api](https://www.npmjs.com/package/node-spotify-api) package in order to retrieve song information from the Spotify API.
+    * Title of the movie.
+    * Year the movie came out.
+    * IMDB Rating of the movie.
+    * Rotten Tomatoes Rating of the movie.
+    * Country where the movie was produced.
+    * Language of the movie.
+    * Plot of the movie.
+    * Actors in the movie.
 
-   * The Spotify API requires you sign up as a developer to generate the necessary credentials. You can follow these steps in order to generate a **client id** and **client secret**:
+Examples:    
 
-   * Step One: Visit <https://developer.spotify.com/my-applications/#!/>
+![Movie-this1](pics/omdb1.png)
 
-   * Step Two: Either login to your existing Spotify account or create a new one (a free account is fine) and log in.
+![Movie-this2](pics/omdb2.png)
 
-   * Step Three: Once logged in, navigate to <https://developer.spotify.com/my-applications/#!/applications/create> to register a new application to be used with the Spotify API. You can fill in whatever you'd like for these fields. When finished, click the "complete" button.
+`node liri.js do-what-it-says`
 
-   * Step Four: On the next screen, scroll down to where you see your client id and client secret. Copy these values down somewhere, you'll need them to use the Spotify API and the [node-spotify-api package](https://www.npmjs.com/package/node-spotify-api).
+LIRI will take the text inside of the file random.txt and then use it to call one of LIRI's commands.
 
-3. `node liri.js movie-this '<movie name here>'`
+Examples:
 
-   * This will output the following information to your terminal/bash window:
+![Do-what-it-says1](pics/do-what-it-says1.png)
 
-     ```
-       * Title of the movie.
-       * Year the movie came out.
-       * IMDB Rating of the movie.
-       * Rotten Tomatoes Rating of the movie.
-       * Country where the movie was produced.
-       * Language of the movie.
-       * Plot of the movie.
-       * Actors in the movie.
-     ```
-
-   * If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
-
-     * If you haven't watched "Mr. Nobody," then you should: <http://www.imdb.com/title/tt0485947/>
-
-     * It's on Netflix!
-
-   * You'll use the request package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use `trilogy`.
-
-4. `node liri.js do-what-it-says`
-
-   * Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
-
-     * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
-
-     * Edit the text in random.txt to test out the feature for movie-this
+![Do-what-it-says2](pics/do-what-it-says2.png)
